@@ -1,5 +1,6 @@
 var Sequelize = require('sequelize');
 var db = require('./_db');
+var Place = require('./place.js')
 
 var Hotel = db.define('hotel', {
   name: Sequelize.STRING,
@@ -8,6 +9,10 @@ var Hotel = db.define('hotel', {
     validate: { min: 1, max: 5 }
   },
   amenities: Sequelize.STRING
+}, {
+  defaultScope: {
+    include: [Place]
+  }
 });
 
 module.exports = Hotel;

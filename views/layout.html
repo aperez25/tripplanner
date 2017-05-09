@@ -32,8 +32,24 @@
 
     <script src="/jquery/jquery.min.js"></script>
     <script src="/bootstrap/js/bootstrap.min.js"></script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDfQxgWt-LSZcEmTEN8581Uq9SzZHnpuys"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDPlnnlRIvbqRo7TlHLOOxybBVtdsmNO0M"></script>
     <script src="/js/map.js"></script>
+    <script src='/js/itinerary.js'></script>
+    <script>
+        const $hotelChoices = $('#hotel-choices');
+        const $activityChoices = $('#activity-choices');
+        const $restaurantChoices = $('#restaurant-choices');
 
+        hotels.forEach(function(hotel, index) {
+          $hotelChoices.append('<option value="hotel" id="' + index + '">' + hotel.name + '</option>');
+        })
+          activities.forEach(function(activity) {
+          $activityChoices.append('<option value="activity">' + activity.name + '</option>');
+        })
+          restaurants.forEach(function(restaurant) {
+          $restaurantChoices.append('<option value="restaurant">' + restaurant.name + '</option>');
+        })
+
+    </script>
   </body>
 </html>
