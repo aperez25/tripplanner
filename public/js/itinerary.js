@@ -36,3 +36,7 @@ $('#itinerary').on('click', '.remove', function(){
     // remove itinerary item
     $(this).parent().remove();
 });
+
+$("#day-add").on('click', function(){
+
+});
