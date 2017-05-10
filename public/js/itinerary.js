@@ -1,6 +1,8 @@
 
-const delButton = '<button class="btn btn-xs btn-danger remove btn-circle id="">x</button>',
-  dayButtons = [];
+const delButton = '<button class="btn btn-xs btn-danger remove btn-circle id="">x</button>';
+let dayCounter = 1,
+  currentDay = 1,
+  itineraryObject = {};
 
 $('#hotel-add').on('click', function(){
   // capture selected hotel value & index
@@ -33,15 +35,41 @@ $('#itinerary').on('click', '.remove', function(){
     //find and delete Google marker
     const markerName = $(this).parent().text().slice(0, -2);
     deleteMarker(markerName)
+    // **** NEED TO UPDATE WITH ITINERARY OBJECT INSTEAD OF DELETING FROM DIV
     // remove itinerary item
     $(this).parent().remove();
 });
-//current-day - a class for currently selected day
-//day-buttons (parent)
-//  <button class="btn btn-circle day-btn current-day">1</button>
-// remove current-day class from day one
-//  <span id="day-title"> - the headline that needs to update
+
 $("#day-add").on('click', function(){
+  // pushing prev day itinerary into array
+  itineraryObject[currentDay] = $('#itinerary').clone()
+  console.log(itineraryObject);
+  // clear itinerary
+  $('#itinerary .list-group').children().text('');
+
   $(this).prev().removeClass('current-day')
-  $(this).before('<button class="btn btn-circle day-btn current-day">' + 'T' + '</button');
+  $(this).before('<button class="btn btn-circle day-btn current-day days">' + ++dayCounter + '</button');
+  $('#day-title').text('Day ' + dayCounter);
+  currentDay = dayCounter;
 });
+
+// on click, switches day titles and buttons
+$('.day-buttons').on('click', '.days', function(){
+  // save current itinerary
+  itineraryObject[currentDay] = $('#itinerary').clone()
+  // update current-day button
+  $(this).parent().find('.current-day')
+  .removeClass('current-day');
+  $(this).addClass('current-day');
+  // update the current-day and replace itinerary
+  currentDay = $(this).text();
+  $('#itinerary').replaceWith(itineraryObject[currentDay]);
+  $('#day-title').text('Day ' + currentDay)
+})
+
+// MAP TO DO
+  // map markers also need to be saved
+  // set markers to null
+  // map needs to be reset
+// if days are switched back, reload map
+
