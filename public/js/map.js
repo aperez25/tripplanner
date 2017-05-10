@@ -1,4 +1,5 @@
 let drawMarker = null;
+let markers =[];
 let deleteMarker = null;
 
 function initializeMap (){
@@ -49,22 +50,21 @@ function initializeMap (){
     activity: '/images/star-3.png'
   };
 
-  drawMarker = function (type, coords) {
+  drawMarker = function (type, coords, title) {
     var latLng = new google.maps.LatLng(coords[0], coords[1]);
     var iconURL = iconURLs[type];
     var marker = new google.maps.Marker({
+      title: title,
       icon: iconURL,
       position: latLng
     });
+    markers.push(marker)
     marker.setMap(currentMap);
     return marker;
   }
 
-  deleteMarker = function (type, coords) {
-    var latLng = google.maps.LatLng(coords[0], coords[1]);
-    var marker = google.maps.Marker({
-      position: latLng
-    });
+  deleteMarker = function (title) {
+    const marker = markers.find((el) => el.title === title);
     marker.setMap(null);
   }
 }
