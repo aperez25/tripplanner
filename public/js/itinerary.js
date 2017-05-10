@@ -1,6 +1,6 @@
 
 const delButton = '<button class="btn btn-xs btn-danger remove btn-circle id="">x</button>',
-  itineraryMarkers = [];
+  dayButtons = [];
 
 $('#hotel-add').on('click', function(){
   // capture selected hotel value & index
@@ -36,7 +36,12 @@ $('#itinerary').on('click', '.remove', function(){
     // remove itinerary item
     $(this).parent().remove();
 });
-
+//current-day - a class for currently selected day
+//day-buttons (parent)
+//  <button class="btn btn-circle day-btn current-day">1</button>
+// remove current-day class from day one
+//  <span id="day-title"> - the headline that needs to update
 $("#day-add").on('click', function(){
-
+  $(this).prev().removeClass('current-day')
+  $(this).before('<button class="btn btn-circle day-btn current-day">' + 'T' + '</button');
 });
